@@ -1,5 +1,7 @@
 package com.example.sander.sander_pset3_test;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,16 +22,17 @@ public class HttpRequestHelper {
 
         if (chosenTag != null) {
             try {
-                URL url = new URL("https://www.omdbapi.com/?t=" + chosenTag);
+                URL url = new URL("https://www.omdbapi.com/?s=" + chosenTag + "&type=movie");
                 HttpsURLConnection connect = (HttpsURLConnection) url.openConnection();
                 connect.setRequestMethod("GET");
+
 
                 Integer responseCode = connect.getResponseCode();
                 if (responseCode >= 200 && responseCode < 300) {
                     BufferedReader bufferedReader =
                             new BufferedReader(new InputStreamReader(connect.getInputStream()));
                     String line = bufferedReader.readLine();
-                    while (line != null) {
+                    if (line != null) {
                         result += line;
                     }
                 }

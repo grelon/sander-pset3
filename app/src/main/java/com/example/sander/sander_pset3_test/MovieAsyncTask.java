@@ -3,6 +3,7 @@ package com.example.sander.sander_pset3_test;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.TokenWatcher;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -36,18 +37,15 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onPostExecute(String result) {
+
         super.onPostExecute(result);
 
-        ArrayList<String> movieData;
-
+        JSONObject searchResults = null;
         try {
-            JSONArray movieStreamObject = new JSONObject(result);
-
-
+            searchResults = new JSONObject(result);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        this.mainActivity.movieStartIntent(movieData);
+        this.mainActivity.movieStartIntent(searchResults);
     }
 }
