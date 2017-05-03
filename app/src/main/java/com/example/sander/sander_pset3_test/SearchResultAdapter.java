@@ -4,9 +4,10 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by sander on 21-4-17.
@@ -14,10 +15,10 @@ import java.util.List;
 
 public class SearchResultAdapter extends BaseAdapter {
 
-    public Context context;
-    public List<Movie> searchResults;
+    private Context context;
+    private ArrayList<Movie> searchResults;
 
-    public SearchResultAdapter(Context context, List<Movie> searchResults) {
+    protected SearchResultAdapter(Context context, ArrayList<Movie> searchResults) {
         this.context = context;
         this.searchResults = searchResults;
     }
@@ -39,11 +40,18 @@ public class SearchResultAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        // inflate view
         View view = View.inflate(context, R.layout.list_search_results, null);
-        TextView tvTitle = (TextView)view.findViewById(R.id.movieTitle);
 
-        // set text view
+        // get views within view
+        TextView tvTitle = (TextView)view.findViewById(R.id.movieTitle);
+        TextView tvYear = (TextView)view.findViewById(R.id.movieYear);
+
+        // set content of views
         tvTitle.setText(searchResults.get(position).getTitle());
-        return null;
+        tvYear.setText(Integer.toString(searchResults.get(position).getYear()));
+
+        // return view
+        return view;
     }
 }

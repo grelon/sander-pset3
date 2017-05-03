@@ -1,5 +1,8 @@
 package com.example.sander.sander_pset3_test;
 
+import android.media.Image;
+
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -7,7 +10,7 @@ import java.net.URL;
  * Created by sander on 21-4-17.
  */
 
-public class Movie {
+public class Movie implements Serializable{
     private int id;
     private String title;
     private int year;

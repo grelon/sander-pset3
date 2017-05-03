@@ -2,15 +2,10 @@ package com.example.sander.sander_pset3_test;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.TokenWatcher;
-import android.util.Log;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by sander on 20-4-17.
@@ -46,6 +41,6 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        this.mainActivity.movieStartIntent(searchResults);
+        this.mainActivity.resultsStartIntent(searchResults);
     }
 }

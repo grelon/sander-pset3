@@ -42,4 +42,31 @@ public class HttpRequestHelper {
         }
         return result;
     }
+
+    protected static synchronized String downloadPlot(String... params) {
+        String result = "";
+        String chosenTag = params[0];
+        Log.d("log", "HttpReq.chosenTag: " + chosenTag);
+
+        if (chosenTag != null) {
+            try {
+                URL url = new URL("https://www.omdbapi.com/?i=" + chosenTag + "&plot=full");
+                HttpsURLConnection connect = (HttpsURLConnection) url.openConnection();
+                connect.setRequestMethod("GET");
+
+                Integer responseCode = connect.getResponseCode();
+                if (responseCode >= 200 && responseCode < 300) {
+                    BufferedReader bufferedReader =
+                            new BufferedReader(new InputStreamReader(connect.getInputStream()));
+                    String line = bufferedReader.readLine();
+                    if (line != null) {
+                        result += line;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
 }
