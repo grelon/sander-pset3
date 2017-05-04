@@ -17,33 +17,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome1"
-        tools:layout_editor_absoluteX="286dp"
-        android:layout_marginTop="16dp"
-        android:onClick="movieSearch"/>
-
     <EditText
         android:id="@+id/eMovie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Search for new movies to add"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/searchButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintTop_toTopOf="@id/searchButton"
         app:layout_constraintBaseline_toBaselineOf="@id/searchButton"/>
+
+    <Button
+        android:id="@id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="search"
+        app:layout_constraintStart_toEndOf="@id/eMovie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcome1"
+        tools:layout_editor_absoluteX="286dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="movieSearch"/>
 
     <ListView
         android:id="@+id/lvWatchlist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_margin="16dp"
         app:layout_constraintTop_toBottomOf="@id/searchButton"
         app:layout_constraintEnd_toEndOf="@id/searchButton"
         app:layout_constraintStart_toStartOf="@id/eMovie">

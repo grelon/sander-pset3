@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sander.sander_pset3_test.DetailsActivity">
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"
+        tools:layout_editor_absoluteY="31dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/detailsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        tools:text="Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        tools:layout_editor_absoluteX="283dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
+        app:layout_constraintBottom_toTopOf="@+id/detailsButton">
+
+        <ImageView
+            android:id="@+id/detailsIvPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/detailsYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:layout_editor_absoluteX="16dp"
+                tools:text="year" />
+
+            <TextView
+                android:id="@+id/detailsDirector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:layout_editor_absoluteX="16dp"
+                tools:text="director" />
+
+            <TextView
+                android:id="@+id/detailsGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:layout_editor_absoluteX="16dp"
+                tools:text="genre" />
+
+            <TextView
+                android:id="@+id/detailsRuntime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:layout_editor_absoluteX="16dp"
+                tools:text="runtime" />
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fillViewport="true"
+                android:scrollbars="vertical"
+                tools:layout_editor_absoluteX="568dp">
+
+                <TextView
+                    android:id="@+id/detailsPlot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="plot" />
+            </ScrollView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@id/detailsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="add/remove"
+        android:layout_margin="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="mutateWatchlist"
+        tools:layout_editor_absoluteX="240dp" />
+
+</android.support.constraint.ConstraintLayout>

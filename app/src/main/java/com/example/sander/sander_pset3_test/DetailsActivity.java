@@ -2,12 +2,16 @@ package com.example.sander.sander_pset3_test;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,6 +61,13 @@ public class DetailsActivity extends AppCompatActivity {
         // get shared prefs
         prefs = getSharedPreferences("watchlist", MODE_PRIVATE);
 
+        // set the content of the views
+        setViews();
+
+        Log.d("log", "Details.onCreate: all set");
+    }
+
+    private void setViews() {
         // get views
         TextView tvTitle = (TextView)findViewById(R.id.detailsTitle);
         TextView tvGenre = (TextView)findViewById(R.id.detailsGenre);
@@ -65,6 +76,7 @@ public class DetailsActivity extends AppCompatActivity {
         TextView tvRuntime = (TextView)findViewById(R.id.detailsRuntime);
         TextView tvPlot = (TextView)findViewById(R.id.detailsPlot);
         Button mutateButton = (Button) findViewById(R.id.detailsButton);
+        ImageView ivPoster = (ImageView) findViewById(R.id.detailsIvPoster);
 
         Log.d("log", "onCreate.getViews: success");
 
@@ -80,7 +92,7 @@ public class DetailsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // decide between an add or a delete button
+        // set the text in the add/remove button
         if (prefs.contains(tvTitle.getText().toString())) {
             mutateButton.setText("Delete");
         }
@@ -88,7 +100,10 @@ public class DetailsActivity extends AppCompatActivity {
             mutateButton.setText("Add");
         }
 
-        Log.d("log", "Details.onCreate: all set");
+        // set imageview
+        Picasso.with(this)
+                .load(String.valueOf(detailedMovie.getPoster()))
+                .into(ivPoster);
     }
 
     public void mutateWatchlist(View view) {
