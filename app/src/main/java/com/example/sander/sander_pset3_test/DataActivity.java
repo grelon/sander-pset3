@@ -1,7 +1,5 @@
 package com.example.sander.sander_pset3_test;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,8 +12,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import static com.example.sander.sander_pset3_test.R.id.lvSearchResults;
@@ -31,7 +27,7 @@ public class DataActivity extends AppCompatActivity{
 
     JSONArray searchResults;
 
-    Context context;
+    // Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +41,9 @@ public class DataActivity extends AppCompatActivity{
         try {
             JSONObject searchObject = new JSONObject(stSearchResults);
             searchResults = searchObject.getJSONArray("Search");
+            for (int i = 0; i < searchResults.length(); i++) {
+                Log.d("log", "searchResults: " + searchResults.get(i).toString());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -53,9 +52,8 @@ public class DataActivity extends AppCompatActivity{
 
         // set up ingredients for list
         makeMovieList(searchResults);
+        Log.d("log", "searchResults2: " + searchResults);
         Log.d("log", "Data.onCreate: makeMovieList success");
-
-        context = this;
 
     }
 
@@ -65,20 +63,12 @@ public class DataActivity extends AppCompatActivity{
         lvItems.setAdapter(adapter);
 
         // listen for clicks on list items
-        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // store selectedMovie
-                String selectedImdbID = movieList.get(position).getImdbID();
-
-                // get the details of the movie
-                DetailsAsyncTask asyncTask = new DetailsAsyncTask(getApplicationContext(), selectedImdbID);
-                asyncTask.execute(selectedImdbID);
-            }
-        });
+        lvItems.setOnItemClickListener(new searchListener());
     }
 
     public void makeMovieList(JSONArray jsonArray) {
         if (jsonArray != null) {
+            Log.d("log", "Data.makeMovieList: start");
 
             // initialize movieList as an ArrayList
             movieList = new ArrayList<>();
@@ -102,13 +92,17 @@ public class DataActivity extends AppCompatActivity{
                             jsonObjectMovie.getString("Title"),
                             jsonObjectMovie.getInt("Year"),
                             jsonObjectMovie.getString("imdbID"),
-                            new URL(jsonObjectMovie.getString("Poster")));
-                } catch (JSONException | MalformedURLException e) {
+                            jsonObjectMovie.getString("Poster"));
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 // add movie to the list
                 movieList.add(movie);
+            }
+
+            for (int i = 0; i < movieList.size(); i++) {
+                Log.d("log", "movieList: " + movieList.get(i).getTitle());
             }
 
             // prepare and set adapter to list
@@ -121,5 +115,16 @@ public class DataActivity extends AppCompatActivity{
         }
 
 
+    }
+
+    private class searchListener implements AdapterView.OnItemClickListener {
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // store selectedMovie
+            String selectedImdbID = movieList.get(position).getImdbID();
+
+            // get the details of the movie
+            DetailsAsyncTask asyncTask = new DetailsAsyncTask(getApplicationContext(), selectedImdbID);
+            asyncTask.execute(selectedImdbID);
+        }
     }
 }

@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static android.support.constraint.R.id.parent;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText movieQuery;
@@ -61,21 +63,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("log", "setListView: success");
 
             // set onClicklistener
-            lvWatchlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(
-                        AdapterView<?> parent,
-                        View view,
-                        int position,
-                        long id) {
-
-                    // start DetailsAsyncTask for list item and move to Details
-                    String imdbID = watchlistImdbIDs.get(position);
-                    DetailsAsyncTask detailsAsyncTask = new DetailsAsyncTask(
-                            getApplicationContext(),
-                            imdbID);
-                    detailsAsyncTask.execute(imdbID);
-                }
-            });
+            lvWatchlist.setOnItemClickListener(new watchListener());
         }
         // if watchlist is empty
         else {
@@ -117,8 +105,24 @@ public class MainActivity extends AppCompatActivity {
         Intent dataIntent = new Intent(this, DataActivity.class);
         dataIntent.putExtra("data", movieData.toString());
         startActivity(dataIntent);
+        Log.d("log", "movieData.toString: " + movieData.toString());
         finish();
         Log.d("log", "movieStartIntent: succes");
     }
 
+    private class watchListener implements AdapterView.OnItemClickListener {
+        public void onItemClick(
+                AdapterView<?> parent,
+                View view,
+                int position,
+                long id) {
+
+            // start DetailsAsyncTask for list item and move to Details
+            String imdbID = watchlistImdbIDs.get(position);
+            DetailsAsyncTask detailsAsyncTask = new DetailsAsyncTask(
+                    getApplicationContext(),
+                    imdbID);
+            detailsAsyncTask.execute(imdbID);
+        }
+    }
 }

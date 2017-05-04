@@ -1,6 +1,7 @@
 package com.example.sander.sander_pset3_test;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -48,8 +49,12 @@ public class SearchResultAdapter extends BaseAdapter {
         TextView tvYear = (TextView)view.findViewById(R.id.movieYear);
 
         // set content of views
+        Log.d("log", "SearchResultAdapter.getView: set view 0");
+        Log.d("log", "getTitle: " + searchResults.get(position));
+        Log.d("log", "title:" + searchResults.get(position).getTitle());
         tvTitle.setText(searchResults.get(position).getTitle());
         tvYear.setText(Integer.toString(searchResults.get(position).getYear()));
+        Log.d("log", "SearchResultAdapter.getView: set view 1");
 
         // return view
         return view;

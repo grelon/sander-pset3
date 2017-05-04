@@ -46,7 +46,7 @@ public class DetailsActivity extends AppCompatActivity {
                     details.getString("Title"),
                     Integer.parseInt(details.getString("Year")),
                     details.getString("imdbID"),
-                    new URL(details.getString("Poster")));
+                    details.getString("Poster"));
 
             detailedMovie = new DetailedMovie(
                     movie,
@@ -54,7 +54,7 @@ public class DetailsActivity extends AppCompatActivity {
                     details.getString("Genre"),
                     details.getString("Director"),
                     details.getString("Plot"));
-        } catch (JSONException | MalformedURLException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -127,6 +127,7 @@ public class DetailsActivity extends AppCompatActivity {
         Intent mainIntent =  new Intent(this, MainActivity.class);
         startActivity(mainIntent);
         finish();
+
         Log.d("log", "Details: finished");
     }
 

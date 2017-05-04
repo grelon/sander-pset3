@@ -15,10 +15,10 @@ public class Movie implements Serializable{
     private String title;
     private int year;
     private String imdbID;
-    private URL poster;
+    private String poster;
 
     // constructor
-    public Movie(int id, String title, int year, String imdbID, URL poster) {
+    public Movie(int id, String title, int year, String imdbID, String poster) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -59,15 +59,11 @@ public class Movie implements Serializable{
         this.imdbID = imdbID;
     }
 
-    public URL getPoster() {
+    public String getPoster() {
         return poster;
     }
 
     public void setPoster(String poster) {
-        try {
-            this.poster = new URL(poster);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        this.poster = poster;
     }
 }
